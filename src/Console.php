@@ -318,6 +318,21 @@ class Console extends SymfonyApplication {
   }
 
   /**
+   * Get debug info for most recent api request.
+   *
+   * @return array
+   * @throws ConsoleException If not in debug mode
+   */
+  public function getLastRequest() : array {
+    if (! $this->isDebug()) {
+      throw new ConsoleException(ConsoleException::DEBUG_NOT_ENABLED);
+    }
+
+    $log = $this->_client->getRequestLog();
+    return end($log);
+  }
+
+  /**
    * Gets the sandbox (if it exists).
    *
    * This method exists mainly for use in the test suite.

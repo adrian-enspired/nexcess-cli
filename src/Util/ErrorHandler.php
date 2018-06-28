@@ -88,6 +88,14 @@ class ErrorHandler extends ExceptableHandler {
       $e = new Exception($e->getMessage(), $e->getCode(), $e);
     }
     $this->_console->renderException($e, $this->_output);
+    if ($this->_console->isDebug()) {
+      if ($e instanceof ApiException) {
+        ob_start();
+        var_dump($this->_console->getLastRequest());
+        $this->_console->say(ob_get_clean());
+      }
+    }
+
     exit($code);
   }
 

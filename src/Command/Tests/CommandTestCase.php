@@ -52,9 +52,8 @@ abstract class CommandTestCase extends TestCase {
       $this->setExpectedException($expected);
     }
 
-    $command = static::_SUBJECT_FQCN;
     $actual = $this->_testRun(
-      new $command($this->_getConsole()),
+      $this->_getSubject(),
       $invocation,
       $interactions
     );
@@ -89,6 +88,18 @@ abstract class CommandTestCase extends TestCase {
       'handle'
     ]);
     return $console;
+  }
+
+  /**
+   * {@inheritDoc}
+   * Provides a sandboxed Console for the subject, if none provided.
+   */
+  protected function _getSubject(...$constructor_args) {
+    if (empty($constructor_args)) {
+      $constructor_args = [$this->_getConsole()];
+    }
+
+    return parent::_getSubject(...$constructor_args);
   }
 
   /**

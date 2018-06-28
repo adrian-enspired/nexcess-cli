@@ -7,7 +7,7 @@
 
 declare(strict_types = 1);
 
-namespace Nexcess\Sdk\Cli\Command\Tests;
+namespace Nexcess\Sdk\Cli\Tests;
 
 use Closure,
   Throwable;

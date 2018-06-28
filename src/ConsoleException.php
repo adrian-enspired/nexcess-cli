@@ -28,6 +28,9 @@ class ConsoleException extends Exception {
   /** @var int Sandbox mode is not enabled. */
   const NOT_SANDBOXED = 5;
 
+  /** @var int Debugging is not enabled. */
+  const DEBUG_NOT_ENABLED = 6;
+
   /** {@inheritDoc} */
   const INFO = [
     self::QUESTIONHELPERLESS =>
@@ -38,6 +41,8 @@ class ConsoleException extends Exception {
       ['message' => 'console.exception.unsupported_profile_type'],
     self::PROFILE_NOT_FOUND =>
       ['message' => 'console.exception.profile_not_found'],
-    self::NOT_SANDBOXED => ['message' => 'console.exception.not_sandboxed']
+    self::NOT_SANDBOXED => ['message' => 'console.exception.not_sandboxed'],
+    self::DEBUG_NOT_ENABLED =>
+      ['message' => 'console.exception.debug_not_enabled']
   ];
 }

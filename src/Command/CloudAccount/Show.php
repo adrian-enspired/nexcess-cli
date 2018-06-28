@@ -67,7 +67,7 @@ class Show extends ShowCommand {
     if ($this->_input['id'] === null) {
       $lookup = $input->getOption('domain') ?? $input->getOption('ip');
       if (! empty($lookup)) {
-        $this->_lookupChoice('id', $lookup);
+        $this->_input['id'] = $this->lookupChoice('id', $lookup);
       }
     }
   }

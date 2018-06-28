@@ -84,6 +84,7 @@
       "no_such_input": "No input '{name}' exists on {command}"
     },
     "exception": {
+      "debug_not_enabled": "Debug mode is not enabled (use -vvv)",
       "invalid_config_type": "SDK configuration class must extend from Nexcess\\Sdk\\Util\\Config; {type} specified",
       "missing_questionhelper": "Symfony's QuestionHelper is not available",
       "not_sandboxed": "Sandbox mode is not enabled",

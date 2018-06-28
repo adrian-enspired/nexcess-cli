@@ -59,6 +59,9 @@ class Create extends CreateCommand {
   /** {@inheritDoc} */
   const RESTRICT_TO = [Config::COMPANY_NEXCESS];
 
+  /** {@inheritDoc} */
+  const SUMMARY_KEYS = ['domain', 'temp_domain'];
+
   /**
    * {@inheritDoc}
    */
@@ -67,7 +70,7 @@ class Create extends CreateCommand {
 
     $app = $input->getArgument('app');
     if ($app !== null) {
-      $this->_lookupChoice('app_id', $app);
+      $this->_input['app_id'] = $this->lookupChoice('app_id', $app);
     }
   }
 
@@ -92,7 +95,7 @@ class Create extends CreateCommand {
       $this->_choices['app_id'] = array_column(
         $this->_getEndpoint('App')->list()->toArray(true),
         'name',
-        'app_id'
+        'id'
       );
       // @todo this is hacky
       uasort(
@@ -124,7 +127,7 @@ class Create extends CreateCommand {
           ->list(['status' => 'active'])
           ->toArray(true),
         null,
-        'cloud_id'
+        'id'
       );
     }
     $clouds = $this->_choices['cloud_id'];
@@ -154,7 +157,7 @@ class Create extends CreateCommand {
           ])
           ->toArray(true),
         null,
-        'package_id'
+        'id'
       );
     }
     $packages = $this->_choices['package_id'];
@@ -172,20 +175,5 @@ class Create extends CreateCommand {
       $packages[$id] = $package['name'];
     }
     return $packages;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  protected function _getSummary(array $details) : array {
-    return [
-      'status' => $details['status'],
-      'domain' => $details['cloud_account_domain'],
-      'temp_domain' => $details['cloud_account_temp_domain'],
-      'app' => $details['cloud_account_app']->get('name'),
-      'service_level' => $details['description'],
-      'cloud' => "{$details['location']->get('location')} " .
-        "({$details['location']->get('location_code')})"
-    ];
   }
 }

@@ -118,7 +118,7 @@ abstract class InputCommand extends Command {
 
     foreach ($this->_input as $name => $value) {
       if ($value === null) {
-        $choices = $this->_getChoices($name);
+        $choices = $this->_getChoices($name, true);
         if (! empty($choices)) {
           $answer = $app->choose(
             $this->getPhrase("choose_{$name}"),
@@ -139,31 +139,19 @@ abstract class InputCommand extends Command {
   }
 
   /**
-   * Gets available choices for a given option.
-   *
-   * Set choices in configure(), or override _getChoices() to lazy-load.
-   *
-   * @param string $name Name of option to get choices for
-   * @return array Map of choice:description pairs if available;
-   *  empty array otherwise
-   */
-  protected function _getChoices(string $name) : array {
-    return $this->_choices[$name] ?? [];
-  }
-
-  /**
    * Looks up an input option by search value.
    *
    * @param string $input Name of the input to lookup
    * @param string $lookup The lookup value
+   * @return string Matching choice on success
+   * @throws CommandException If no match found
    */
-  protected function _lookupChoice(string $input, string $lookup) {
+  public function lookupChoice(string $input, string $lookup) : string {
     $choices = $this->_getChoices($input, false);
     $matches = preg_grep("({$lookup})iu", $choices);
     switch (count($matches)) {
       case 1:
-        $this->_input[$input] = array_search(reset($matches), $choices);
-        return;
+        return array_search(reset($matches), $choices);
       case 0:
         throw new CommandException(
           CommandException::NO_LOOKUP_MATCH,
@@ -183,5 +171,19 @@ abstract class InputCommand extends Command {
           ]
         );
     }
+  }
+
+  /**
+   * Gets available choices for a given option.
+   *
+   * Set choices in configure(), or override _getChoices() to lazy-load.
+   *
+   * @param string $name Name of option to get choices for
+   * @param bool $format Get choices in human-readable format?
+   * @return array Map of choice:description pairs if available;
+   *  empty array otherwise
+   */
+  protected function _getChoices(string $name, bool $format = true) : array {
+    return $this->_choices[$name] ?? [];
   }
 }
