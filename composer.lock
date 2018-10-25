@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bff2939324136fbea9f59832e663f2a7",
+    "content-hash": "b7a725c45eb2f98fa2d384b678b9d0af",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nexcess/nexcess-php-sdk.git",
-                "reference": "8c9186c6c954cc43203f5161622feb42a23554ef"
+                "reference": "5a74abf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nexcess/nexcess-php-sdk/zipball/8c9186c6c954cc43203f5161622feb42a23554ef",
-                "reference": "8c9186c6c954cc43203f5161622feb42a23554ef",
+                "url": "https://api.github.com/repos/nexcess/nexcess-php-sdk/zipball/5a74abf",
+                "reference": "5a74abf",
                 "shasum": ""
             },
             "require": {
@@ -238,7 +238,7 @@
                 "source": "https://github.com/nexcess/nexcess-php-sdk/tree/master",
                 "issues": "https://github.com/nexcess/nexcess-php-sdk/issues"
             },
-            "time": "2018-10-23T17:05:31+00:00"
+            "time": "2018-10-24T17:37:39+00:00"
         },
         {
             "name": "php-enspired/exceptable",
@@ -2246,7 +2246,14 @@
             "time": "2018-01-29T19:49:41+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.1",
+            "alias_normalized": "0.1.0.0",
+            "version": "9999999-dev",
+            "package": "nexcess/nexcess-php-sdk"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "nexcess/nexcess-php-sdk": 20
